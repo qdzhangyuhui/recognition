@@ -25,7 +25,7 @@ def  gamma_trans(img,gamma):  # gamma函数处理
 def main():
     page = 1
     path = filedialog.askdirectory()
-    with  open('data2.txt', 'w') as doc:
+    with  open('data.txt', 'w') as doc:
         for lists in os.listdir(path):
             sub_path = os.path.join(path, lists)
             if os.path.isfile(sub_path):
@@ -52,7 +52,7 @@ def main():
                 eroded = cv2.erode(dilate, kernel2)  # 腐蚀
                 # cv2.imshow('image_eroded', eroded)
                 cv2.imwrite('d2.jpeg', eroded)
-                text = pytesseract.image_to_string(Image.open('d2.jpeg'), lang='num12')
+                text = pytesseract.image_to_string(Image.open('d2.jpeg'), lang='num13')
                 figure = normalize_figure(text)
                 print('%d the ocr recognition is %s'%(page,text))
                 print('the normalize figure is %s'%figure)
@@ -61,7 +61,7 @@ def main():
                 # print(sub_path)
                 os.rename(sub_path, path + newname)
                 cv2.imwrite('testnew1/' + name + '_' + text + '.jpeg', eroded)
-                doc.write(text)
+                doc.write(figure+'\n')
                 page += 1
                 # cv2.waitKey(0)
 
